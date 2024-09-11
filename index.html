@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>echarts示例</title>
+		<script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.4.3/files/dist/echarts.min.js">
+		</script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+	</head>
+
+	<body>
+		<div id="bar_01" style="width: 500px;height:400px;"></div>
+		<div id="pie_01" style="width: 500px;height:400px;"></div>
+		<div id="line_01" style="width: 500px;height:400px;"></div>
+		<div id="gauge_01" style="width: 500px;height:400px;"></div>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('bar_01'));
+			//饼图
+			var pie_01 = echarts.init(document.getElementById('pie_01'));
+			//折线图
+			var line_01 = echarts.init(document.getElementById('line_01'));
+			//仪表盘
+			var gauge_01 = echarts.init(document.getElementById('gauge_01'));
+			// 柱状图的配置项和数据
+			var option = {
+				title: {
+					text: '销售订单量',
+					left: 'center'
+				},
+				tooltip: {},
+				// legend: {
+				// 	data: ['月份'],
+				// 	left: 260,
+				// },
+				xAxis: {
+					data: ["09月", "10月", "11月", "12月"]
+				},
+				yAxis: {},
+				series: [{
+					itemStyle: {
+						//color:'blue'
+					},
+					name: '月份',
+					type: 'bar',
+					data: [1532, 1322, 1251, 1298],
+					markPoint: {
+						data: [{
+								type: 'max',
+								name: '最大值'
+							},
+							{
+								type: 'min',
+								name: '最小值'
+							}
+						]
+					},
+					markLine: {
+						data: [{
+							type: 'average',
+							name: '平均值'
+						}]
+					},
+					label: {
+						show: true,
+						rotate: 50,
+						position: 'inside'
+					},
+					barWidth: '40%',
+				}]
+			};
+			// 饼图配置项和数据
+			var pieOption = {
+				title: {
+					text: '同步订单量',
+					left: 'center'
+				},
+				tooltip: {
+					trigger: 'item'
+				},
+				// legend: {
+				// 	orient: 'vertical',
+				// 	left: 'left'
+				// },
+				series: [{
+					type: 'pie',
+					radius: '60%',
+					data: [
+						{
+							value:462,
+							name:'09月'
+						},
+						{
+							value:746,
+							name:'10月'
+						},
+						{
+							value:851,
+							name:'11月'
+						},
+						{
+							value:886,
+							name:'12月'
+						}
+					],					
+					label:{
+						show:true,
+						formatter:function(arg){
+							return arg.name+' '+arg.value+'\n '+arg.percent+'%'
+						},
+						position: 'inside'
+					},
+					emphasis: {
+						itemStyle: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			};
+			//折线图配置项
+			var lineOption ={
+				title: {
+					text: 'wms接口生成单据量',
+					left: 'center'
+				},
+				xAxis: {
+				    type: 'category',
+				    data: ['09月', '10月', '11月', '12月']
+				  },
+				  yAxis: {
+				    type: 'value'
+				  },
+				  series: [
+				    {
+				      data: [2977, 5075, 5859, 6036],
+					  markPoint: {
+					  	data: [{
+					  			type: 'max',
+					  			name: '最大值'
+					  		},
+					  		{
+					  			type: 'min',
+					  			name: '最小值'
+					  		}
+					  	]
+					  },
+					  markLine: {
+					  	data: [{
+					  		type: 'average',
+					  		name: '平均值'
+					  	}]
+					  },
+					  label:{
+					  	show:true,
+					  	position: 'inside',
+						offset:[10,15]
+					  },
+				      type: 'line'
+				    }
+					
+				  ]
+			};
+			//仪表盘配置项
+			var gaugeOption = {
+			  title: {
+			  	text: '平均减少工作量75%',
+			  	left: 'center'
+			  },	
+			  tooltip: {
+			    formatter: '{a} <br/>{b} : {c}%'
+			  },
+			  series: [
+			    {
+			      name: 'Pressure',
+			      type: 'gauge',
+			      detail: {
+			        formatter: '{value}'
+			      },
+			      data: [
+			        {
+			          value: 75,
+			          name: 'SCORE'
+			        }
+			      ]
+			    }
+			  ]
+			};
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+			pie_01.setOption(pieOption);
+			line_01.setOption(lineOption);
+			gauge_01.setOption(gaugeOption);
+			$(function(){
+				$.ajax({
+						type:"get",
+						url:"http://10.2.20.175:8088/api/Product/ProGETProduceSumDay",
+						// url:"http://192.168.11.168:8088/api/PCB/EquipmentSpotChecksStatus",
+						data:"",
+						dataType:"json",
+						success : function(data){
+							console.log(data)
+							}
+							
+						
+					})
+			})
+		</script>
+	</body>
+</html>
