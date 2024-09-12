@@ -162,50 +162,6 @@
 					
 				  ]
 			};
-			//仪表盘配置项
-			var gaugeOption = {
-			  title: {
-			  	text: '平均减少工作量75%',
-			  	left: 'center'
-			  },	
-			  tooltip: {
-			    formatter: '{a} <br/>{b} : {c}%'
-			  },
-			  series: [
-			    {
-			      name: 'Pressure',
-			      type: 'gauge',
-			      detail: {
-			        formatter: '{value}'
-			      },
-			      data: [
-			        {
-			          value: 75,
-			          name: 'SCORE'
-			        }
-			      ]
-			    }
-			  ]
-			};
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-			pie_01.setOption(pieOption);
-			line_01.setOption(lineOption);
-			gauge_01.setOption(gaugeOption);
-			$(function(){
-				$.ajax({
-						type:"get",
-						url:"http://10.2.20.175:8088/api/Product/ProGETProduceSumDay",
-						// url:"http://192.168.11.168:8088/api/PCB/EquipmentSpotChecksStatus",
-						data:"",
-						dataType:"json",
-						success : function(data){
-							console.log(data)
-							}
-							
-						
-					})
-			})
 		</script>
 	</body>
 </html>
