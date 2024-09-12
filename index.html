@@ -18,8 +18,6 @@
 			var myChart = echarts.init(document.getElementById('bar_01'));
 			//饼图
 			var pie_01 = echarts.init(document.getElementById('pie_01'));
-			//折线图
-			var line_01 = echarts.init(document.getElementById('line_01'));
 			
 			// 柱状图的配置项和数据
 			var option = {
@@ -117,49 +115,6 @@
 						}
 					}
 				}]
-			};
-			//折线图配置项
-			var lineOption ={
-				title: {
-					text: 'wms接口生成单据量',
-					left: 'center'
-				},
-				xAxis: {
-				    type: 'category',
-				    data: ['09月', '10月', '11月', '12月']
-				  },
-				  yAxis: {
-				    type: 'value'
-				  },
-				  series: [
-				    {
-				      data: [2977, 5075, 5859, 6036],
-					  markPoint: {
-					  	data: [{
-					  			type: 'max',
-					  			name: '最大值'
-					  		},
-					  		{
-					  			type: 'min',
-					  			name: '最小值'
-					  		}
-					  	]
-					  },
-					  markLine: {
-					  	data: [{
-					  		type: 'average',
-					  		name: '平均值'
-					  	}]
-					  },
-					  label:{
-					  	show:true,
-					  	position: 'inside',
-						offset:[10,15]
-					  },
-				      type: 'line'
-				    }
-					
-				  ]
 			};
 		</script>
 	</body>
